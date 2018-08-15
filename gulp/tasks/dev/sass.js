@@ -33,5 +33,11 @@ gulp.task('site-sass', function () {
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('static/css'));
   });
-
-  gulp.task('sass', gulp.series('site-sass', 'blue-sass', 'orange-sass','grey-sass'))
+  gulp.task('ubuntu-sass', function () {
+    return gulp.src('static/scss/ubuntu.scss')
+        .pipe(sourcemaps.init())
+        .pipe(sass({ style: 'compressed' }).on('error', sass.logError))
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('static/css'));
+  });
+  gulp.task('sass', gulp.series('site-sass', 'blue-sass', 'orange-sass','grey-sass', 'ubuntu-sass'))
